@@ -195,6 +195,8 @@ fn main() -> eframe::Result {
     // First, so every start-up record (and the engine's panic hook, installed with the first
     // Engine) is captured; see `logging`.
     let logger = logging::install();
+    // Stop here, with a message, unless this computer has a valid license (`craft-license`).
+    craft_license::enforce("SoundCraft");
     let args: Vec<String> = std::env::args().skip(1).collect();
     if args.iter().any(|a| a == "--version" || a == "-V") {
         println!("SoundCraft {}", env!("CARGO_PKG_VERSION"));
